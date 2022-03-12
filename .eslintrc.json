@@ -27,6 +27,7 @@
     "prettier/prettier": ["error", { "endOfLine": "auto" }, { "usePrettierrc": true }],
     "@typescript-eslint/no-var-requires": "error",
     "@typescript-eslint/no-explicit-any": "off",
+    "react/require-default-props": "off",
     "no-nested-ternary": "off",
     "react/jsx-handler-names": "warn",
     "react/jsx-pascal-case": "warn",
