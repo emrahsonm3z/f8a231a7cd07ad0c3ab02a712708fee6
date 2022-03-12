@@ -1,3 +1,65 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "airbnb-typescript/base",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:prettier/recommended",
+    "prettier"
+  ],
+  "globals": {
+    "window": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier", "@typescript-eslint", "simple-import-sort"],
+  "rules": {
+    "@typescript-eslint/no-var-requires": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/jsx-handler-names": "warn",
+    "react/jsx-pascal-case": "warn",
+    "react/react-in-jsx-scope": "off",
+    "react/state-in-constructor": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
+    "react/prop-types": 0,
+    "react/jsx-props-no-spreading": "off",
+    "default-param-last": "off",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "sort-imports": "off",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "import/prefer-default-export": "off",
+    "import/no-unresolved": "error",
+    "import/extensions": [
+      "error",
+      "always",
+      { "js": "never", "jsx": "never", "ts": "never", "tsx": "never" }
+    ],
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.path.json"
+      }
+    }
+  }
 }
