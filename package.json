@@ -10,7 +10,8 @@
     "lint:tsc": "tsc",
     "format:ts": "prettier --write \"./**/*.{js,ts,tsx}\"",
     "format": "npm run format:ts && npm run lint:fix",
-    "check-types": "tsc --noemit"
+    "check-types": "tsc --noemit",
+    "svgr": "svgr icons -d components/icons --typescript --icon --svg-props className= --replace-attr-values \"#fff=currentColor\" --replace-attr-values \"#000=currentColor\" --svgo-config .svgorc.json && eslint components/icons --ext .tsx --quiet --fix"
   },
   "dependencies": {
     "next": "12.1.0",
@@ -18,6 +19,7 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@svgr/cli": "5.5.0",
     "@types/node": "17.0.21",
     "@types/react": "17.0.40",
     "@typescript-eslint/eslint-plugin": "^5.14.0",
