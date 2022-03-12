@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import React, { useEffect, useState } from 'react'
 
-import { Button } from '~/components/button'
-import { Search } from '~/components/icons'
+import { BreadCrumb, BreadCrumbItem } from '~/components/breadcrumb/BreadCrumb'
+import { ProductCard } from '~/components/product/ProductCard'
 import { productService } from '~/services/product.service'
-import { theme } from '~/theme'
 
+import styles from './ProductList.module.css'
 import { Product } from './types/Product'
 
 type ProductListState = {
@@ -25,26 +28,56 @@ export const ProductList = () => {
     productService
       .getAll()
       .then((res) => {
-        setProducts({ loading: false, data: res })
+        setProducts({
+          loading: false,
+          data: res.products.map((p) => ({
+            id: p.id,
+            title: p.title,
+            image: p.image.src,
+            handle: p.handle,
+            body_html: p.body_html,
+            price: p.variants[0].price
+          }))
+        })
       })
       .catch(() => setProducts({ loading: false, data: null }))
   }
 
+  useEffect(() => {
+    getAllProduct()
+  }, [])
+
+  const breadcrumbItems: Partial<BreadCrumbItem>[] = [
+    {
+      title: 'tüm ürünler',
+      path: '/'
+    },
+    {
+      title: 'Product A',
+      path: '/a',
+      active: true
+    }
+  ]
+
   return (
-    <div>
-      <main>
-        <Button onClick={getAllProduct}>Click</Button>
-        <Search width={32} height={32} color={theme.colors.primary} />
-        <section>
-          {products.loading ? (
-            <div>Loading</div>
-          ) : products.data === null ? (
-            <div>Ürünler bulunamadı</div>
-          ) : (
-            <pre>{JSON.stringify(products.data, null, 2)}</pre>
-          )}
-        </section>
-      </main>
-    </div>
+    <>
+      <BreadCrumb items={breadcrumbItems} />
+      <section>
+        {products.loading ? (
+          <div>Loading</div>
+        ) : products.data === null ? (
+          <div>Ürünler bulunamadı</div>
+        ) : (
+          <div className={styles['product-list']}>
+            {products.data.map((product) => {
+              const { id, title, handle, price, image } = product
+              return (
+                <ProductCard key={id} title={title} path={handle} price={price} image={image} />
+              )
+            })}
+          </div>
+        )}
+      </section>
+    </>
   )
 }
