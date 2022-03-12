@@ -24,8 +24,10 @@
   },
   "plugins": ["react", "prettier", "@typescript-eslint", "simple-import-sort"],
   "rules": {
+    "prettier/prettier": ["error", { "endOfLine": "auto" }, { "usePrettierrc": true }],
     "@typescript-eslint/no-var-requires": "error",
     "@typescript-eslint/no-explicit-any": "off",
+    "no-nested-ternary": "off",
     "react/jsx-handler-names": "warn",
     "react/jsx-pascal-case": "warn",
     "react/react-in-jsx-scope": "off",
