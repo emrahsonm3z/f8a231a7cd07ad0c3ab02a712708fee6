@@ -1,0 +1,27 @@
+.footer {
+  flex-shrink: 0;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.footer-menu {
+  text-align: center;
+
+  &__item {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+
+    & + & {
+      margin-left: 24px;
+    }
+  }
+
+  &__link {
+    color: var(--text-mute);
+
+    &:hover {
+      color: (--text-color);
+    }
+  }
+}
