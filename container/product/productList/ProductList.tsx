@@ -7,9 +7,10 @@ import React, { useEffect, useState } from 'react'
 import { BreadCrumb, BreadCrumbItem } from '~/components/breadcrumb/BreadCrumb'
 import { Pagination } from '~/components/pagination'
 import { ProductCard } from '~/components/product/ProductCard'
-import { PRODUCT_ROW_PER_PAGE } from '~/constants'
+import { PRODUCT_ROW_PER_PAGE, SEARCH_QUERY_NAME } from '~/constants'
 import { ROUTES } from '~/constants/routes'
 import { productService } from '~/services/product.service'
+import { findInValues } from '~/utils/findInValues'
 
 import { useProductContext } from '../store/context'
 import { ProductListRequest, ProductListResponse } from '../types/Product'
@@ -24,17 +25,18 @@ export const ProductList = () => {
   const { products } = useProductContext()
   const router = useRouter()
 
+  const [filteredProducts, setFilteredProducts] = useState(products)
+
   const [productList, setProductList] = useState<ProductListResult>({
     loading: false,
     result: undefined
   })
 
   const handleGetProductList = (request: ProductListRequest) => {
-    console.log('🚀 -> handleGetProductList -> request', request)
     setProductList((prev: ProductListResult) => ({ ...prev, loading: true }))
     productService
       .getProductsPerPage({
-        products,
+        products: request.products,
         page: request.page,
         rows_per_page: request.rows_per_page
       })
@@ -50,10 +52,26 @@ export const ProductList = () => {
   ]
 
   useEffect(() => {
-    if (products !== null) {
-      handleGetProductList({ products, page: 1, rows_per_page: PRODUCT_ROW_PER_PAGE })
+    if (filteredProducts !== null) {
+      handleGetProductList({
+        products: filteredProducts,
+        page: 1,
+        rows_per_page: PRODUCT_ROW_PER_PAGE
+      })
     }
-  }, [products])
+  }, [filteredProducts, setFilteredProducts])
+
+  useEffect(() => {
+    if (
+      typeof router.query[SEARCH_QUERY_NAME] !== 'undefined' &&
+      router.query[SEARCH_QUERY_NAME] !== ''
+    ) {
+      const searchProducts = findInValues(products, router.query[SEARCH_QUERY_NAME])
+      setFilteredProducts(searchProducts)
+    } else {
+      setFilteredProducts(products)
+    }
+  }, [router])
 
   return (
     <>
@@ -81,7 +99,11 @@ export const ProductList = () => {
                   total={productList.result.total_rows}
                   pageSize={productList.result.rows_per_page}
                   onChange={(page: number, pageSize: number) =>
-                    handleGetProductList({ products, page, rows_per_page: pageSize })
+                    handleGetProductList({
+                      products: filteredProducts,
+                      page,
+                      rows_per_page: pageSize
+                    })
                   }
                 />
               </div>

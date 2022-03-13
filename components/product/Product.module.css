@@ -5,9 +5,12 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  justify-content: space-between;
   border: 1px solid #ddd;
   transition: all 0.3s;
   background-color: #fff;
+  height: 100%;
+  text-align: center;
 
   &:hover {
     border-color: var(--primary);
@@ -21,6 +24,11 @@
   }
 
   &__title {
+    --min-fs: 0.72;
+    --max-fs: 0.84;
+
+    min-height: 50px;
+    flex: 1 0 auto;
     font-weight: 600;
   }
 

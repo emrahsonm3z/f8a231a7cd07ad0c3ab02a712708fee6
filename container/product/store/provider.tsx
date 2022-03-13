@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { useRouter } from 'next/router'
 import { useEffect, useReducer } from 'react'
 
 import { productService } from '~/services/product.service'
@@ -10,13 +9,9 @@ import { ProductContext } from './context'
 import { productReducer } from './reducer'
 
 export const ProductProvider: React.FC = ({ children }) => {
-  const router = useRouter()
-
   const [productState, productDispatch] = useReducer(productReducer, {
     products: null
   })
-
-  console.log('🚀 PROVIDER STATE', productState)
 
   useEffect(() => {
     if (productState.products === null) {
@@ -42,7 +37,11 @@ export const ProductProvider: React.FC = ({ children }) => {
           })
         )
     }
-  }, [router])
+  }, [])
 
-  return <ProductContext.Provider value={productState}>{children}</ProductContext.Provider>
+  return (
+    productState.products !== null && (
+      <ProductContext.Provider value={productState}>{children}</ProductContext.Provider>
+    )
+  )
 }

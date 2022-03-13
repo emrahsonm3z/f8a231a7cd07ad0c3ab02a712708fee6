@@ -12,6 +12,7 @@
   .breadcrumb__item {
     text-transform: capitalize;
     color: var(--text-mute);
+    font-weight: 600;
 
     &.breadcrumb--active {
       pointer-events: none;
