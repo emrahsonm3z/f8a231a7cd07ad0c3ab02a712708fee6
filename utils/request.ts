@@ -19,16 +19,19 @@ const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
 }
 
 const onRequestError = (error: AxiosError): Promise<AxiosError> => {
+  // eslint-disable-next-line no-console
   console.error(`[request error] [${JSON.stringify(error)}]`)
   return Promise.reject(error)
 }
 
 const onResponse = (response: AxiosResponse): any => {
+  // eslint-disable-next-line no-console
   console.debug('[response successfully]', response)
   return response.status === 200 ? response.data : []
 }
 
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
+  // eslint-disable-next-line no-console
   console.error(`[response error] [${JSON.stringify(error)}]`)
   return Promise.reject(error)
 }

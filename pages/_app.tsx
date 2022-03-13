@@ -2,8 +2,14 @@ import '../styles/globals.css'
 
 import type { AppProps } from 'next/app'
 
+import { ProductProvider } from '~/container/product/store/provider'
+
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  return <Component {...pageProps} />
+  return (
+    <ProductProvider>
+      <Component {...pageProps} />
+    </ProductProvider>
+  )
 }
 
 export default MyApp

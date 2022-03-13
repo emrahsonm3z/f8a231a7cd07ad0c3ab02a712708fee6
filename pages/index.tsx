@@ -3,7 +3,7 @@ import type { NextPage } from 'next'
 import { Layout } from '~/components/layout'
 import { ProductList } from '~/container/product'
 
-const Home: NextPage = () => {
+const AllProducts: NextPage = () => {
   return (
     <Layout>
       <ProductList />
@@ -11,4 +11,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default AllProducts

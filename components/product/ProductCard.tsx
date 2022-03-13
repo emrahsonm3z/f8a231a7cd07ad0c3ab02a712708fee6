@@ -13,8 +13,8 @@ interface IProductCardProps {
 
 export const ProductCard: React.FC<IProductCardProps> = ({ title, price, path, image }) => {
   return (
-    <Link href={path}>
-      <a href={path}>
+    <Link href={`product/${path}`}>
+      <a href={`product/${path}`}>
         <div className={styles['product-card']}>
           <div className={styles['product-card__image']}>
             <Image src={image} alt={title} width={100} height={100} objectFit="contain" />
