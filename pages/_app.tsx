@@ -2,7 +2,7 @@ import '../styles/globals.css'
 
 import type { AppProps } from 'next/app'
 
-import { ProductProvider } from '~/container/product/store/provider'
+import { ProductProvider } from '~/containers/product/store/provider'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (

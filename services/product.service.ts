@@ -1,4 +1,4 @@
-import { ProductListRequest, ProductListResponse } from '~/container/product/types/Product'
+import { ProductListRequest, ProductListResponse } from '~/containers/product/types/Product'
 import { request } from '~/utils/request'
 
 interface IProductService {

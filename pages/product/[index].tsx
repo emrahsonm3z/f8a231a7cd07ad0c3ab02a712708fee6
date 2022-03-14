@@ -3,9 +3,9 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 import { Layout } from '~/components/layout'
-import { ProductDetail } from '~/container/product'
-import { useProductContext } from '~/container/product/store/context'
-import { Product } from '~/container/product/types/Product'
+import { ProductDetail } from '~/containers/product'
+import { useProductContext } from '~/containers/product/store/context'
+import { Product } from '~/containers/product/types/Product'
 import sleep from '~/utils/sleep'
 
 type ProductDetailPageProps = {
