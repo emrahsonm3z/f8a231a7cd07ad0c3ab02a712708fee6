@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
       <ul className={styles['footer-menu']}>
         <li className={styles['footer-menu__item']}>
           <a
-            href="https://github.com/emrahsonm3z/ykb-ui-challenge"
+            href="https://github.com/emrahsonm3z/f8a231a7cd07ad0c3ab02a712708fee6"
             target="_blank"
             rel="noopener noreferrer"
             className={styles['footer-menu__link']}
