@@ -20,6 +20,7 @@ These variables must be set
 ### Note:
 
 The project was created with Next.js to avoid dealing with packaging processes.
+All the records were taken from the product service and the desired operations were performed.
 
 ### Defaults
 
@@ -37,3 +38,39 @@ When the data is to be retrieved, loading is first shown on the screen. After th
 
 - loading (boolean)
 - data (object | array | null)
+
+### Test
+
+**utils/findInValues.ts**
+A test is written for the search operation from the given array.
+
+### Product Types
+
+```
+export type Product = {
+  id: number
+  title: string
+  price: string
+  handle: string
+  image: string
+  body_html: string
+}
+
+export type ProductListRequest = {
+  products: Product[]
+  page: number
+  rows_per_page: number
+}
+
+export type ProductListResponse = {
+  current_page: number
+  next: number | null
+  prev: number | null
+  total_pages: number
+  total_rows: number
+  rows_per_page: number
+  rows_returned: number
+  data: Product[]
+}
+
+```
